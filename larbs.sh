@@ -17,7 +17,7 @@ esac done
 [ -z "$dotfilesrepo" ] && dotfilesrepo="https://github.com/hadesagd/voidrice.git"
 [ -z "$progsfile" ] && progsfile="https://raw.githubusercontent.com/hadesagd/LARBS/bspwm/progs.csv"
 [ -z "$aurhelper" ] && aurhelper="yay"
-[ -z "$repobranch" ] && repobranch="bspwm"
+[ -z "$repobranch" ] && repobranch="master"
 
 ### FUNCTIONS ###
 
