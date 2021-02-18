@@ -136,6 +136,15 @@ putgitrepo() { # Downloads a gitrepo $1 and places the files in $2 only overwrit
 	sudo -u "$name" cp -rfT "$dir" "$2"
 	}
 
+configuredisplaymanager(){ # configures lightdm, and its greeter
+	dialog --infobox "Setting up the display manager..." 4 60
+	[ -e /etc/lightdm/lightdm.conf] && sed "s/example-gtk-gnome/lightdm-webkit2-greeter/g" /etc/lightdm/lightdm.conf > tmp.conf
+	mv -f /etc/lightdm/tmp.conf /etc/lightdm/lightdm.conf
+	[ -e /etc/lightdm/lightdm-webkit2-greeter.conf] && sed "s/antergos/glorious/g" /etc/lightdm/lighdm-webkit2-greeter.conf > tmp.conf
+	mv -f /etc/lightdm/tmp.conf /etc/lightdm/lightdm-webkit2-greeter.conf
+	rm /etc/lightdm/tmp.conf 
+	}
+
 systembeepoff() { dialog --infobox "Getting rid of that retarded error beep sound..." 10 50
 	rmmod pcspkr
 	echo "blacklist pcspkr" > /etc/modprobe.d/nobeep.conf ;}
@@ -216,6 +225,9 @@ git update-index --assume-unchanged "/home/$name/README.md" "/home/$name/LICENSE
 
 # Most important command! Get rid of the beep!
 systembeepoff
+
+# Configure the display manager
+configuredisplaymanager
 
 # Make zsh the default shell for the user.
 chsh -s /bin/zsh "$name" >/dev/null 2>&1
